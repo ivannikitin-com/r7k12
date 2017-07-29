@@ -48,9 +48,6 @@ class Plugin
 	 */
 	public function __construct( $pluginPath, $pluginURL )
 	{
-		// Локализация плагина
-		load_plugin_textdomain( R7K12, false, R7K12_FOLDER . 'lang' );
-		
 		// Инициализация свойств
 		$this->path = $pluginPath;	// Путь к файлам плагина
 		$this->url = $pluginURL;	// URL к файлам плагина

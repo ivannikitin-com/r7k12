@@ -23,10 +23,13 @@ define( 'R7K12_URL', 	plugin_dir_url( __FILE__ ) );		// Plugin URL
 add_action( 'plugins_loaded', 'r7k12_init' );
 function r7k12_init()
 {
+	// Локализация плагина
+	load_plugin_textdomain( R7K12, false, basename( dirname( __FILE__ ) ) . '/lang' );	
+	
+	// Загрузка плагина
 	require( R7K12_FOLDER . 'classes/plugin.php' );
 	require( R7K12_FOLDER . 'classes/settings.php' );
 	require( R7K12_FOLDER . 'classes/crm.php' );
 	require( R7K12_FOLDER . 'classes/cf7.php' );
 	new R7K12\Plugin( R7K12_FOLDER, R7K12_URL );
 }
-
