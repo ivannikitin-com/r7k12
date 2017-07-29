@@ -4,7 +4,7 @@
 Плагин интеграции с системой r7k12.
 
 ## Установка плагина
-1. Скачайте ZIP архив с (GITHub)[https://github.com/ivannikitin-com/r7k12].
+1. Скачайте ZIP архив с [GITHub](https://github.com/ivannikitin-com/r7k12).
 2. Шататно установите плагин в WordPress.
 3. Активируйте плагин.
 
