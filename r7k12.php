@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: r7k12 Integration plugin
-Plugin URI:  http://in-soft.pro/soft/r7k12/
+Plugin URI:  https://github.com/ivannikitin-com/r7k12
 Description: r7k12 Integration plugin
 Version:     0.1
 Author:      IvanNikitin.com
