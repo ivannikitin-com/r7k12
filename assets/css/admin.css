@@ -1,0 +1,33 @@
+/**
+ * Admin settings page CSS
+ */
+#r7k12-settings .r7k12-field
+{
+	clear: both;
+	margin-bottom: 2em;
+} 
+#r7k12-settings label
+{
+	display: inline-block;
+	width: 150px;
+	float: left;	
+}
+#r7k12-settings .r7k12-input
+{
+	margin-left: 160px;
+}
+#r7k12-settings .r7k12-input input[type=text],
+#r7k12-settings .r7k12-input textarea
+{
+	width: 80%;
+}
+
+#r7k12-settings .r7k12-input textarea
+{
+	height: 6em;
+}
+
+#r7k12-settings .r7k12-input p
+{
+	margin: 2px;
+}
