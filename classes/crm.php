@@ -35,7 +35,28 @@ class CRM
         
         if ( empty ( $this->projectKey ) )
 		    add_action( 'admin_notices', array( $this, 'showNoticeNoKey' ) );
+		
+		// Подключение скрипта и регистрация просмотра страницы
+		add_action( 'wp_enqueue_scripts', array( $this, 'loadScript' ) );
+		add_action( 'wp_footer', array( $this, 'addPageView' ) );
 	}
+	
+	/**
+	 * Загрузка скрипта
+	 */
+	public function loadScript()
+	{
+		wp_register_script( R7K12, 'https://r7k12.ru/scripts/' . $this->projectKey . '/counter.js');
+		wp_enqueue_script( R7K12 );
+	}
+	
+	/**
+	 * Добавление PageView
+	 */
+	public function addPageView()
+	{
+		echo "<script>R7K12.send('pageview');</script>" . PHP_EOL;
+	}	
     
 	/**
 	 * Предупреждение об отсуствии ключа
