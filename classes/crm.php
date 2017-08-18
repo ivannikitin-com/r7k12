@@ -115,7 +115,9 @@ class CRM
 			));
 
 			// Передача
-			return file_get_contents( 'https://r7k12.ru/' . $this->projectKey . '/crm/', false, $context );
+			$result =  file_get_contents( 'https://r7k12.ru/' . $this->projectKey . '/crm/', false, $context );
+			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data sent', R7K12 ) . ": $email, $phone, $name" );
+			return $result;
 			
 		}
 		catch ( Exception $e )

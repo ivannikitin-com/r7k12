@@ -77,7 +77,7 @@ class ContactForm7
 		else
 		{
 			// Обязательные поля есть, ставим хук на обработку
-			add_action('wpcf7_before_send_mail', array( $this, 'handle' ) );
+			add_action('wpcf7_mail_sent', array( $this, 'handle' ) );
 		}
 		    		
 	}
@@ -96,35 +96,37 @@ class ContactForm7
 	 * Обработка формы
 	 * @param mixed $cf7 Объект формы 
 	 */	
-	function handle( $cf7 )
-	{
+	function handle( $cf7 ) 
+	{	
 		// Обработку ОБЯЗАТЕЛЬНО в блоке try catch чтобы не подвешивать форму при ошибках
 		try
 		{
-			// Читаем данные и конвердируем объект формы
-			// См. CFDBIntegrationContactForm7.php
-			$formData = $cf7;
-			if ( ! isset($cf7->posted_data ) && class_exists( 'WPCF7_Submission' ) ) 
-			{
-				// Contact Form 7 version 3.9 removed $cf7->posted_data and now
-				// we have to retrieve it from an API
-				$submission = WPCF7_Submission::get_instance();
-				if ($submission) 
-				{
-					$data = array();
-					$data['title'] = $cf7->title();
-					$data['posted_data'] = $submission->get_posted_data();
-					$data['uploaded_files'] = $submission->uploaded_files();
-					$data['WPCF7_ContactForm'] = $cf7;
-					$formData = (object) $data;
-				}
-			}
+			$this->plugin->activityLog( __( 'CF7 handle: ', R7K12 ) . $cf7->title );
 			
-			// Ищем поля формы по именам, указанных в параметрах
 			$name = '';
 			$email = '';
-			$tel = '';
-			foreach ($formData->posted_data as $key => $value)
+			$tel = '';			
+			
+			// Читаем данные и конвертируем объект формы
+			// https://stackoverflow.com/questions/42807833/how-to-capture-post-data-with-contact-form7
+			$submission = \WPCF7_Submission::get_instance();
+			//$this->plugin->activityLog( __( 'WPCF7_Submission', R7K12 ) . ': ' . var_export( $submission, true ) );
+			
+			if ( ! $submission ) 
+			{
+				// Ошибка! Объект WPCF7_Submission не инициализирован!
+				$this->plugin->errorLog( 
+					__( 'No WPCF7_Submission object!', R7K12 ) . 
+					'$cf7: ' . var_export( $cf7, true ) );
+				return $cf7;
+			}			
+			
+			// Данные формы
+			$posted_data = $submission->get_posted_data();
+			//$this->plugin->activityLog( __( 'CF7 form data', R7K12 ) . ': ' . var_export( $posted_data, true ) );
+			
+			// Ищем поля формы по именам, указанных в параметрах
+			foreach ($posted_data as $key => $value)
 			{
 				// Текущее поле имя?
 				if ( strpos( $this->nameField, $key ) !== false )
@@ -152,12 +154,13 @@ class ContactForm7
 				// Ошибка! Поля не заполнены!
 				$this->plugin->errorLog( 
 					__( 'CF7 required fileds are empty!', R7K12 ) . 
-					'$formData: ' . var_export( $formData, true ) );
+					'$posted_data: ' . var_export( $posted_data, true ) );
 				return $cf7;
 			}
 			
 			// Передача
-			$this->plugin->crm->send( self::FORM_TYPE, $email, $phone, $name );
+			//$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name" );
+			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name );
 			
 		}
 		catch ( Exception $e )
