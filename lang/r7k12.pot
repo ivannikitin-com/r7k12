@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: r7k12 Integration plugin\n"
-"POT-Creation-Date: 2017-07-29 13:08+0300\n"
-"PO-Revision-Date: 2017-07-29 13:07+0300\n"
+"POT-Creation-Date: 2017-08-18 08:55+0300\n"
+"PO-Revision-Date: 2017-08-18 08:55+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,20 +25,32 @@ msgstr ""
 msgid "Contact form 7 fields not specified!"
 msgstr ""
 
-#: classes/cf7.php:154
+#: classes/cf7.php:104
+msgid "CF7 handle: "
+msgstr ""
+
+#: classes/cf7.php:119
+msgid "No WPCF7_Submission object!"
+msgstr ""
+
+#: classes/cf7.php:156
 msgid "CF7 required fileds are empty!"
 msgstr ""
 
-#: classes/crm.php:46
+#: classes/crm.php:67
 msgid "Project key for r7k12 not specified!"
 msgstr ""
 
-#: classes/crm.php:67
+#: classes/crm.php:88
 msgid "Project key is empty!"
 msgstr ""
 
-#: classes/crm.php:74
+#: classes/crm.php:95
 msgid "E-mail and Phone fields are empty!"
+msgstr ""
+
+#: classes/crm.php:119
+msgid "Data sent"
 msgstr ""
 
 #: classes/settings.php:123 classes/settings.php:124
@@ -105,7 +117,7 @@ msgid "r7k12 Integration plugin"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://in-soft.pro/soft/r7k12/"
+msgid "https://github.com/ivannikitin-com/r7k12"
 msgstr ""
 
 #. Author of the plugin/theme

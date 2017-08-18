@@ -1,24 +1,24 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Project-Id-Version: r7k12\n"
-"POT-Creation-Date: 2017-07-29 13:08+0300\n"
-"PO-Revision-Date: 2017-07-29 13:28+0300\n"
+"POT-Creation-Date: 2017-08-18 08:55+0300\n"
+"PO-Revision-Date: 2017-08-18 08:57+0300\n"
+"Last-Translator: \n"
 "Language-Team: Иван Никитин и партнеры\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: r7k12.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
-"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
-"esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Last-Translator: \n"
-"Language: ru\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -26,21 +26,33 @@ msgstr ""
 msgid "Contact form 7 fields not specified!"
 msgstr "Поля форм Contact Form 7 не указаны!"
 
-#: classes/cf7.php:154
+#: classes/cf7.php:104
+msgid "CF7 handle: "
+msgstr "Обработка CF7: "
+
+#: classes/cf7.php:119
+msgid "No WPCF7_Submission object!"
+msgstr "Объект WPCF7_Submission не найден!"
+
+#: classes/cf7.php:156
 msgid "CF7 required fileds are empty!"
 msgstr "Поля форм Contact Form 7 не заполнены!"
 
-#: classes/crm.php:46
+#: classes/crm.php:67
 msgid "Project key for r7k12 not specified!"
 msgstr "Ключ проекта не указан!"
 
-#: classes/crm.php:67
+#: classes/crm.php:88
 msgid "Project key is empty!"
 msgstr "Ключ проекта не заполнен!"
 
-#: classes/crm.php:74
+#: classes/crm.php:95
 msgid "E-mail and Phone fields are empty!"
 msgstr "Поля E-mail и телефон не заполнены!"
+
+#: classes/crm.php:119
+msgid "Data sent"
+msgstr "Данные отправлены"
 
 #: classes/settings.php:123 classes/settings.php:124
 msgid "r7k12 Integration"
@@ -112,8 +124,8 @@ msgid "r7k12 Integration plugin"
 msgstr "r7k12 плагин интеграции"
 
 #. Plugin URI of the plugin/theme
-msgid "http://in-soft.pro/soft/r7k12/"
-msgstr "http://in-soft.pro/soft/r7k12/"
+msgid "https://github.com/ivannikitin-com/r7k12"
+msgstr "https://github.com/ivannikitin-com/r7k12"
 
 #. Author of the plugin/theme
 msgid "IvanNikitin.com"
@@ -122,3 +134,6 @@ msgstr "Иван  Никитин и партнеры"
 #. Author URI of the plugin/theme
 msgid "https://ivannikitin.com/"
 msgstr "https://ivannikitin.com/"
+
+#~ msgid "http://in-soft.pro/soft/r7k12/"
+#~ msgstr "http://in-soft.pro/soft/r7k12/"
