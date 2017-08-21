@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: r7k12 Integration plugin\n"
-"POT-Creation-Date: 2017-08-18 08:55+0300\n"
-"PO-Revision-Date: 2017-08-18 08:55+0300\n"
+"POT-Creation-Date: 2017-08-21 19:29+0300\n"
+"PO-Revision-Date: 2017-08-21 19:29+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -109,6 +109,42 @@ msgstr ""
 msgid ""
 "Specify form fields with customer tel delimeted by comma. For example: "
 "tel-123, tel-345"
+msgstr ""
+
+#: classes/woocommerce.php:57
+msgid "Order ID"
+msgstr ""
+
+#: classes/woocommerce.php:60
+msgid "Order status"
+msgstr ""
+
+#: classes/woocommerce.php:61
+msgid "Paid"
+msgstr ""
+
+#: classes/woocommerce.php:61
+msgid "Not paid"
+msgstr ""
+
+#: classes/woocommerce.php:63
+msgid "Payment Method"
+msgstr ""
+
+#: classes/woocommerce.php:66
+msgid "Billing Address"
+msgstr ""
+
+#: classes/woocommerce.php:74
+msgid "Shipping Address"
+msgstr ""
+
+#: classes/woocommerce.php:83
+msgid "Order Items"
+msgstr ""
+
+#: classes/woocommerce.php:124
+msgid "Data prepared"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

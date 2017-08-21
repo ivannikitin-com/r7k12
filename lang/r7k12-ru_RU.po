@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: r7k12\n"
-"POT-Creation-Date: 2017-08-18 08:55+0300\n"
-"PO-Revision-Date: 2017-08-18 08:57+0300\n"
+"POT-Creation-Date: 2017-08-21 19:29+0300\n"
+"PO-Revision-Date: 2017-08-21 19:31+0300\n"
 "Last-Translator: \n"
 "Language-Team: Иван Никитин и партнеры\n"
 "Language: ru\n"
@@ -117,6 +117,42 @@ msgid ""
 msgstr ""
 "Укажите через запятую поля форм, которые содержат телефон  пользователя, "
 "например: tel-123, tel-345"
+
+#: classes/woocommerce.php:57
+msgid "Order ID"
+msgstr "Код заказа"
+
+#: classes/woocommerce.php:60
+msgid "Order status"
+msgstr "Статус заказа"
+
+#: classes/woocommerce.php:61
+msgid "Paid"
+msgstr "Оплачен"
+
+#: classes/woocommerce.php:61
+msgid "Not paid"
+msgstr "Не оплачен"
+
+#: classes/woocommerce.php:63
+msgid "Payment Method"
+msgstr "Способ оплаты"
+
+#: classes/woocommerce.php:66
+msgid "Billing Address"
+msgstr "Адрес плательщика"
+
+#: classes/woocommerce.php:74
+msgid "Shipping Address"
+msgstr "Адрес доставки"
+
+#: classes/woocommerce.php:83
+msgid "Order Items"
+msgstr "Элементы заказа"
+
+#: classes/woocommerce.php:124
+msgid "Data prepared"
+msgstr "Данные подготовлены"
 
 #. Plugin Name of the plugin/theme
 #. Description of the plugin/theme
