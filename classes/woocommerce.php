@@ -1,0 +1,134 @@
+<?php
+/**
+ * Класс реализует обработку заказов WooCoomerce
+ */
+namespace R7K12;
+class WooCommerce
+{
+	/**
+	 * Тип отправки для CRM
+	 * @static
+	 */
+	const FORM_TYPE = 'Form'; 	
+	
+	
+	/**
+	 * Основной класс плагина
+	 * @var Plugin
+	 */
+	private $plugin;
+	
+       
+    	
+	/**
+	 * Конструктор
+	 * инициализирует параметры и загружает данные
+	 * @param R7K12\Plugin	$plugin Ссылка на основной объект плагина
+	 */
+	public function __construct( $plugin )
+	{
+        // Инициализируем свойства
+		$this->plugin = $plugin;
+		
+		// Если WooCommerce активирован
+		if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) 
+		{
+			// Ставим хук на обработку
+			add_action('woocommerce_thankyou', array( $this, 'handle' ) );
+		}   		
+	}
+    
+	/**
+	 * Обработка формы
+	 * @param mixed $order_id Код заказа 
+	 */	
+	function handle( $order_id ) 
+	{	
+		// Обработку ОБЯЗАТЕЛЬНО в блоке try catch
+		try
+		{
+			// Получаем объект заказа
+			$order = new \WC_Order( $order_id );
+			
+			// Требуемые данные заказа
+			$email = $order->get_billing_email();
+			$tel = $order->get_billing_phone();
+			$name = trim( $order->get_billing_first_name() . ' ' . $order->get_billing_last_name() );
+			$comment = __( 'Order ID', R7K12 ) . ': ' . $order_id . PHP_EOL;
+			
+			// Статус оплаты заказа
+			$comment .= __( 'Order status', R7K12 ) . ': ';	
+			$comment .= ( $order->is_paid() ) ? __( 'Paid', R7K12 ) : __( 'Not paid', R7K12 ) ;
+			$comment .= PHP_EOL;
+			$comment .= __( 'Payment Method', R7K12 ) . ': ' . $order->get_payment_method_title() . PHP_EOL;
+			
+			// Адрес оплаты
+			$comment .= __( 'Billing Address', R7K12 ) . ': ' . 
+				$order->get_billing_postcode() . ', ' . 
+				$order->get_billing_state() . ', ' . 
+				$order->get_billing_city() . ', ' . 
+				$order->get_billing_address_1() . ' ' . 
+				$order->get_billing_address_2() . PHP_EOL; 				
+
+			// Адрес доставки
+			$comment .= __( 'Shipping Address', R7K12 ) . ': ' . 
+				$order->get_shipping_postcode() . ', ' . 
+				$order->get_shipping_state() . ', ' . 
+				$order->get_shipping_city() . ', ' . 
+				$order->get_shipping_address_1() . ' ' . 
+				$order->get_shipping_address_2() . PHP_EOL;
+			
+			
+			// Элементы заказа
+			$comment .= __( 'Order Items', R7K12 ) . PHP_EOL;	
+			$items = $order->get_items();
+			foreach( $items as $item_id => $item ) 
+			{
+
+				$product_name = $item['name'];											// Наименование товара
+				$item_quantity = $order->get_item_meta($item_id, '_qty', true);			// Число единиц
+				$item_total = $order->get_item_meta($item_id, '_line_total', true);		// Всего за единицу
+
+				// Проверяем, если ли у продукта вариации. Если да, читаем ID вариации
+				$product_variation_id = $item['variation_id'];
+				if ( $product_variation_id ) 
+				{
+					$product = new \WC_Product($item['variation_id']);
+				} 
+				else 
+				{
+					$product = new \WC_Product($item['product_id']);
+				}
+
+				// Артикул
+				$sku = $product->get_sku();
+				if ( empty ( $sku ) ) $sku = $product_name;
+
+				// Цена
+				$price = $product->get_price();
+
+				// Категория
+				$cats = $product->get_category_ids();
+				$category = '';
+				if ( count( $cats ) > 0 )
+				{
+					$cat = get_term( $cats[0] );
+					$category = $cat->name;
+				}
+
+				// Строка данных о продукте
+				$comment .= "{$product_name} {$item_quantity} {$price}" . PHP_EOL;	
+			}			
+			
+			// Передача
+			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment" );
+			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment );
+			
+		}
+		catch ( Exception $e )
+		{
+			// Ошибка! Пишем в лог.
+			$this->plugin->errorLog( $e->getMessage() );
+		}				
+	}
+}

@@ -41,7 +41,13 @@ class Plugin
 	 * ContactForm7
 	 * @var R7K12\ContactForm7
 	 */
-	public $cf7;	
+	public $cf7;
+	
+	/** 
+	 * WooCommerce
+	 * @var R7K12\WooCommerce
+	 */
+	public $wc;	
 		
 	/**
 	 * Конструктор
@@ -64,6 +70,7 @@ class Plugin
 		$this->settings = new Settings( R7K12, $this );
 		$this->crm = new CRM( $this );
 		$this->cf7 = new ContactForm7( $this );
+		$this->cf7 = new WooCommerce( $this );
 		
 	}
 	

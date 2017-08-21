@@ -31,5 +31,6 @@ function r7k12_init()
 	require( R7K12_FOLDER . 'classes/settings.php' );
 	require( R7K12_FOLDER . 'classes/crm.php' );
 	require( R7K12_FOLDER . 'classes/cf7.php' );
+	require( R7K12_FOLDER . 'classes/woocommerce.php' );
 	new R7K12\Plugin( R7K12_FOLDER, R7K12_URL );
 }
