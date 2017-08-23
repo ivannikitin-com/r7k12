@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: r7k12 Integration plugin\n"
-"POT-Creation-Date: 2017-08-21 19:29+0300\n"
-"PO-Revision-Date: 2017-08-21 19:29+0300\n"
+"POT-Creation-Date: 2017-08-23 09:41+0300\n"
+"PO-Revision-Date: 2017-08-23 09:41+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,19 +21,19 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: classes/cf7.php:91
+#: classes/cf7.php:106
 msgid "Contact form 7 fields not specified!"
 msgstr ""
 
-#: classes/cf7.php:104
+#: classes/cf7.php:119
 msgid "CF7 handle: "
 msgstr ""
 
-#: classes/cf7.php:119
+#: classes/cf7.php:135
 msgid "No WPCF7_Submission object!"
 msgstr ""
 
-#: classes/cf7.php:156
+#: classes/cf7.php:179
 msgid "CF7 required fileds are empty!"
 msgstr ""
 
@@ -57,58 +57,68 @@ msgstr ""
 msgid "r7k12 Integration"
 msgstr ""
 
-#: classes/settings.php:163
+#: classes/settings.php:164
 msgid "r7k12 Integration Settings"
 msgstr ""
 
-#: classes/settings.php:164
+#: classes/settings.php:165
 msgid "Please, specify settings for r7k12 integration."
 msgstr ""
 
-#: classes/settings.php:165
+#: classes/settings.php:166
 msgid "Error: The nonce is not valid!"
 msgstr ""
 
-#: classes/settings.php:171
+#: classes/settings.php:172
 msgid "Project key"
 msgstr ""
 
-#: classes/settings.php:175
+#: classes/settings.php:176
 msgid "Specify your r7k12 project key."
 msgstr ""
 
-#: classes/settings.php:179
+#: classes/settings.php:180
 msgid "Contact Form 7 Settings"
 msgstr ""
 
-#: classes/settings.php:181
+#: classes/settings.php:182
 msgid "Customer name fields"
 msgstr ""
 
-#: classes/settings.php:185
+#: classes/settings.php:186
 msgid ""
 "Specify form fields with customer name delimeted by comma. For example: "
 "name-123, name-345"
 msgstr ""
 
-#: classes/settings.php:189
+#: classes/settings.php:190
 msgid "Customer email fields"
 msgstr ""
 
-#: classes/settings.php:193
+#: classes/settings.php:194
 msgid ""
 "Specify form fields with customer e-mail delimeted by comma. For example: "
 "email-123, email-345"
 msgstr ""
 
-#: classes/settings.php:197
+#: classes/settings.php:198
 msgid "Customer tel fields"
 msgstr ""
 
-#: classes/settings.php:201
+#: classes/settings.php:202
 msgid ""
 "Specify form fields with customer tel delimeted by comma. For example: "
 "tel-123, tel-345"
+msgstr ""
+
+#: classes/settings.php:206
+msgid "Comment fields"
+msgstr ""
+
+#: classes/settings.php:210
+msgid ""
+"Specify form fields with comments delimeted by comma. For example: comment, "
+"dynamichidden-123"
 msgstr ""
 
 #: classes/woocommerce.php:57

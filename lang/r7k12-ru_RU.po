@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: r7k12\n"
-"POT-Creation-Date: 2017-08-21 19:29+0300\n"
-"PO-Revision-Date: 2017-08-21 19:31+0300\n"
+"POT-Creation-Date: 2017-08-23 09:41+0300\n"
+"PO-Revision-Date: 2017-08-23 09:42+0300\n"
 "Last-Translator: \n"
 "Language-Team: Иван Никитин и партнеры\n"
 "Language: ru\n"
@@ -22,19 +22,19 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: classes/cf7.php:91
+#: classes/cf7.php:106
 msgid "Contact form 7 fields not specified!"
 msgstr "Поля форм Contact Form 7 не указаны!"
 
-#: classes/cf7.php:104
+#: classes/cf7.php:119
 msgid "CF7 handle: "
 msgstr "Обработка CF7: "
 
-#: classes/cf7.php:119
+#: classes/cf7.php:135
 msgid "No WPCF7_Submission object!"
 msgstr "Объект WPCF7_Submission не найден!"
 
-#: classes/cf7.php:156
+#: classes/cf7.php:179
 msgid "CF7 required fileds are empty!"
 msgstr "Поля форм Contact Form 7 не заполнены!"
 
@@ -58,35 +58,35 @@ msgstr "Данные отправлены"
 msgid "r7k12 Integration"
 msgstr "r7k12 интеграция"
 
-#: classes/settings.php:163
+#: classes/settings.php:164
 msgid "r7k12 Integration Settings"
 msgstr "параметры интеграции с r7k12"
 
-#: classes/settings.php:164
+#: classes/settings.php:165
 msgid "Please, specify settings for r7k12 integration."
 msgstr "Укажите параметры ниже. Они необходимы для работы плагина."
 
-#: classes/settings.php:165
+#: classes/settings.php:166
 msgid "Error: The nonce is not valid!"
 msgstr "Ошибка: проверка передачи не удалась!"
 
-#: classes/settings.php:171
+#: classes/settings.php:172
 msgid "Project key"
 msgstr "Ключ проекта"
 
-#: classes/settings.php:175
+#: classes/settings.php:176
 msgid "Specify your r7k12 project key."
 msgstr "Укажите ключ проекта. Его можно узнать в системе r7k12."
 
-#: classes/settings.php:179
+#: classes/settings.php:180
 msgid "Contact Form 7 Settings"
 msgstr "Параметры Contact Form 7"
 
-#: classes/settings.php:181
+#: classes/settings.php:182
 msgid "Customer name fields"
 msgstr "Поля форм с именем пользователя"
 
-#: classes/settings.php:185
+#: classes/settings.php:186
 msgid ""
 "Specify form fields with customer name delimeted by comma. For example: "
 "name-123, name-345"
@@ -94,11 +94,11 @@ msgstr ""
 "Укажите через запятую поля форм, которые содержат имя пользователя, "
 "например: name-123, name-345"
 
-#: classes/settings.php:189
+#: classes/settings.php:190
 msgid "Customer email fields"
 msgstr "Поля форм с E-mail пользователя"
 
-#: classes/settings.php:193
+#: classes/settings.php:194
 msgid ""
 "Specify form fields with customer e-mail delimeted by comma. For example: "
 "email-123, email-345"
@@ -106,17 +106,29 @@ msgstr ""
 "Укажите через запятую поля форм, которые содержат E-mail  пользователя, "
 "например: email-123, email-345"
 
-#: classes/settings.php:197
+#: classes/settings.php:198
 msgid "Customer tel fields"
 msgstr "Поля форм с телефоном пользователя"
 
-#: classes/settings.php:201
+#: classes/settings.php:202
 msgid ""
 "Specify form fields with customer tel delimeted by comma. For example: "
 "tel-123, tel-345"
 msgstr ""
 "Укажите через запятую поля форм, которые содержат телефон  пользователя, "
 "например: tel-123, tel-345"
+
+#: classes/settings.php:206
+msgid "Comment fields"
+msgstr "Поля форм с комментариями"
+
+#: classes/settings.php:210
+msgid ""
+"Specify form fields with comments delimeted by comma. For example: comment, "
+"dynamichidden-123"
+msgstr ""
+"Укажите через запятую поля форм, которые содержат комментарии например: "
+"comment, dynamichidden-123"
 
 #: classes/woocommerce.php:57
 msgid "Order ID"
