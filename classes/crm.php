@@ -73,12 +73,12 @@ class CRM
 	 * @param string	$type 				Тип заявки (ОБЯЗЯТЕЛЬНО)
 	 * @param string	$email 				E-mail адрес контакта (ОБЯЗАТЕЛЕН ЕСЛИ НЕ УКАЗАН ТЕЛЕФОН КОНТАКТА)
 	 * @param string	$phone 				Телефон контакта (ОБЯЗАТЕЛЕН ЕСЛИ НЕ УКАЗАН E-MAIL КОНТАКТА)
-	 * @param string	$name				Название контакта (НЕ ОБЯЗАТЕЛЬНО)	 
-	 * @param string	$title 				Заголовок заявки (НЕ ОБЯЗАТЕЛЬНО)
 	 * @param string	$comment			Комментарий к сделке (НЕ ОБЯЗАТЕЛЬНО)
+	 * @param string	$name				Название контакта (НЕ ОБЯЗАТЕЛЬНО)
+	 * @param string	$title 				Заголовок заявки (НЕ ОБЯЗАТЕЛЬНО)
 	 * @param string	$create_new_lead	'0' - новая сделка создается только если нет сделки или предыдущая в статусе "успешно реализовано" или "возврат"; '1' - новая сделка создается в любом случае
 	 */
-	public function send( $type, $email, $phone, $name='', $title='', $comment='', $create_new_lead='0' )
+	public function send( $type, $email, $phone, $name='', $comment='', $title='', $create_new_lead='0' )
 	{
 		try
 		{
@@ -98,7 +98,7 @@ class CRM
 			
 			// Подготовка массива
 			$CRM = array(
-				'r7k12id'			=> isset($_COOKIE['r7k12_si']) ? $_COOKIE['r7k12_si'] : null,
+				'r7k12id'			=> isset( $_COOKIE['r7k12_si'] ) ? $_COOKIE['r7k12_si'] : null,
 				'type' 				=> $type,
 				'title'				=> $title,
 				'comment'			=> $comment,
@@ -110,13 +110,13 @@ class CRM
 			$context = stream_context_create(array(
 				'http' => array(
 					'method' => 'POST',
-					'content' => json_encode($CRM),
+					'content' => json_encode( $CRM ),
 				),
 			));
 
 			// Передача
 			$result =  file_get_contents( 'https://r7k12.ru/' . $this->projectKey . '/crm/', false, $context );
-			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data sent', R7K12 ) . ": $email, $phone, $name" );
+			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data sent', R7K12 ) . ': ' . var_export( $CRM, true ) );
 			return $result;
 			
 		}

@@ -150,7 +150,8 @@ class Settings
 				$this->set( CRM::PROJECTKEY_PARAM, 				sanitize_text_field( $_POST['r7k12ProjectKey'] ) );	
 				$this->set( ContactForm7::NAME_FIELDS_PARAM, 	sanitize_text_field( $_POST['r7k12CF7_name'] ) );	
 				$this->set( ContactForm7::EMAIL_FIELDS_PARAM, 	sanitize_text_field( $_POST['r7k12CF7_email'] ) );	
-				$this->set( ContactForm7::TEL_FIELDS_PARAM, 	sanitize_text_field( $_POST['r7k12CF7_tel'] ) );	
+				$this->set( ContactForm7::TEL_FIELDS_PARAM, 	sanitize_text_field( $_POST['r7k12CF7_tel'] ) );
+				$this->set( ContactForm7::COMMENT_FIELDS_PARAM,	sanitize_text_field( $_POST['r7k12CF7_comment'] ) );
 
 				// Save all data
 				$this->save();					
@@ -201,7 +202,14 @@ class Settings
 			<p><?php esc_html_e( 'Specify form fields with customer tel delimeted by comma. For example: tel-123, tel-345', R7K12 ) ?></p>
 		</div>
 	</div>	
-	
+	<div class="r7k12-field">
+		<label for="r7k12CF7_comment"><?php esc_html_e( 'Comment fields', R7K12 ) ?></label>
+		<div class="r7k12-input">
+			<input id="r7k12CF7_comment" name="r7k12CF7_comment" type="text" 
+				   value="<?php echo esc_attr( $this->get( ContactForm7::COMMENT_FIELDS_PARAM ) ) ?>" />
+			<p><?php esc_html_e( 'Specify form fields with comments delimeted by comma. For example: comment, dynamichidden-123', R7K12 ) ?></p>
+		</div>
+	</div>	
 	<?php submit_button() ?>
 </form>
 <?php	

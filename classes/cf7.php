@@ -24,6 +24,13 @@ class ContactForm7
 	const TEL_FIELDS_PARAM = 'tel-fields'; 	
 	
 	/**
+	 * Параметр настроек Comment Fields
+	 * @static
+	 */
+	const COMMENT_FIELDS_PARAM = 'comment-fields'; 		
+	
+	
+	/**
 	 * Тип отправки для CRM
 	 * @static
 	 */
@@ -52,7 +59,14 @@ class ContactForm7
 	 * Поля формы с телефоном пользователя
 	 * @var string
 	 */
-	private $telField;	
+	private $telField;
+	
+ 	/**
+	 * Поля формы с комментариями
+	 * @var string
+	 */
+	private $commentField;
+	
        
     	
 	/**
@@ -67,6 +81,7 @@ class ContactForm7
 		$this->nameField = $this->plugin->settings->get( self::NAME_FIELDS_PARAM );
 		$this->emailField = $this->plugin->settings->get( self::EMAIL_FIELDS_PARAM );
 		$this->telField = $this->plugin->settings->get( self::TEL_FIELDS_PARAM );
+		$this->commentField = $this->plugin->settings->get( self::COMMENT_FIELDS_PARAM );
 		
 		// Проверяем заполнение требуемых свойств в настройках плагина
         if ( empty ( $this->emailField ) && empty ( $this->telField ) )
@@ -105,7 +120,8 @@ class ContactForm7
 			
 			$name = '';
 			$email = '';
-			$tel = '';			
+			$tel = '';		
+			$comment = '';		
 			
 			// Читаем данные и конвертируем объект формы
 			// https://stackoverflow.com/questions/42807833/how-to-capture-post-data-with-contact-form7
@@ -145,7 +161,14 @@ class ContactForm7
 				{
 					$tel = $value;
 					continue;                   
+				}
+				// Текущее поле comment?
+				if ( strpos( $this->commentField, $key ) !== false )
+				{
+					$comment = strip_tags( $value );
+					continue;                   
 				}				
+				
 			} 			
 			
 			// Проверка заполнения полей
@@ -159,8 +182,8 @@ class ContactForm7
 			}
 			
 			// Передача
-			//$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name" );
-			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name );
+			//$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment" );
+			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment );
 			
 		}
 		catch ( Exception $e )
