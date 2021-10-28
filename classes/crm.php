@@ -38,7 +38,7 @@ class CRM
 		
 		// Подключение скрипта и регистрация просмотра страницы
 		add_action( 'wp_enqueue_scripts', array( $this, 'loadScript' ) );
-		add_action( 'wp_footer', array( $this, 'addPageView' ) );
+		//add_action( 'wp_footer', array( $this, 'addPageView' ) );
 	}
 	
 	/**
@@ -46,8 +46,10 @@ class CRM
 	 */
 	public function loadScript()
 	{
-		wp_register_script( R7K12, 'https://r7k12.ru/scripts/' . $this->projectKey . '/counter.js');
-		wp_enqueue_script( R7K12 );
+		/*wp_register_script( R7K12, 'https://r7k12.ru/scripts/' . $this->projectKey . '/counter.js');
+		wp_enqueue_script( R7K12 );*/
+		//echo '<script async src="https://r7k12.ru/scripts/38c1d300914bfeab79f61bcd51c2cd29/counter.js"></script>';
+    echo "<script>(function(w,d,k){w['r7k12']=w['r7k12']||[];var s=d.createElement('script');s.async=1;s.src='https://counter.r7k12.com/scripts/'+k+'/counter.js';s.type='application/javascript';d.head.appendChild(s);})(window,document,'38c1d300914bfeab79f61bcd51c2cd29');r7k12.push({hit:'pageview'});</script>";
 	}
 	
 	/**
@@ -55,7 +57,9 @@ class CRM
 	 */
 	public function addPageView()
 	{
-		echo "<script>R7K12.send('pageview');</script>" . PHP_EOL;
+		/*echo '<script async src="https://r7k12.ru/scripts/38c1d300914bfeab79f61bcd51c2cd29/counter.js"></script>' . PHP_EOL;
+		echo "<script>R7K12.send('pageview');</script>" . PHP_EOL;*/
+		echo '<script>R7K12.send("pageview");</script>';
 	}	
     
 	/**
@@ -78,7 +82,7 @@ class CRM
 	 * @param string	$title 				Заголовок заявки (НЕ ОБЯЗАТЕЛЬНО)
 	 * @param string	$create_new_lead	'0' - новая сделка создается только если нет сделки или предыдущая в статусе "успешно реализовано" или "возврат"; '1' - новая сделка создается в любом случае
 	 */
-	public function send( $type, $email, $phone, $name='', $comment='', $title='', $create_new_lead='0' )
+	public function send( $type, $email, $phone, $name='', $comment='', $title='', $create_new_lead='1', $orderMethod='website', $shop = '' )
 	{
 		try
 		{
@@ -105,7 +109,16 @@ class CRM
 				'name'				=> $name,
 				'email'				=> $email,
 				'phone'				=> $phone,
-				'create_new_lead'	=> $create_new_lead
+				'create_new_lead'	=> $create_new_lead,
+				'fields' => array(
+					'lead' => array(//Поля для сделок
+						"orderType" => "",
+						"orderMethod" => $orderMethod,
+						"website" => "",
+            "shop" => $shop 
+					)
+				)
+
 			);
 			$context = stream_context_create(array(
 				'http' => array(

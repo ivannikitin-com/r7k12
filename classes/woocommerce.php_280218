@@ -34,8 +34,7 @@ class WooCommerce
 		if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) 
 		{
 			// Ставим хук на обработку
-			//add_action('woocommerce_new_order', array( $this, 'handle' ) );
-			add_action('woocommerce_checkout_order_processed', array( $this, 'handle' ), 10, 1 );
+			add_action('woocommerce_thankyou', array( $this, 'handle' ) );
 		}   		
 	}
     
@@ -129,20 +128,12 @@ class WooCommerce
 				// Строка данных о продукте
 				$comment .= "{$product_name} {$item_quantity} {$price}" . PHP_EOL;	
 			}
-      
-		  // Примечание к заказу
-		  if($order->get_customer_note() != ''){
-			 $comment .= 'Примечание к заказу: '.$order->get_customer_note().PHP_EOL;
-		  }
+			
 			$orderMethod = "shopping-cart";
-			if(empty($email) && !empty($tel)){
-				$orderMethod = "buy-one-click";
-			}
 			
 			// Передача
-      $shop = 'new-pkbm-rozn';
 			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment" );
-			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment, '', 1, $orderMethod, $shop);
+			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment, '', 1, $orderMethod);
 			
 			
 		}

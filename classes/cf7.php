@@ -121,7 +121,9 @@ class ContactForm7
 			$name = '';
 			$email = '';
 			$tel = '';		
-			$comment = '';		
+			$comment = '';
+			$orderMethod = "website";
+      $shop = 'new-pkbm-opt';
 			
 			// Читаем данные и конвертируем объект формы
 			// https://stackoverflow.com/questions/42807833/how-to-capture-post-data-with-contact-form7
@@ -153,19 +155,77 @@ class ContactForm7
 				// Текущее поле e-mail?
 				if ( strpos( $this->emailField, $key ) !== false )
 				{
-					$email = $value;
+					if($key == 'email-1'){
+						$comment = 'Отправить кп';
+            $shop = "new-pkbm-opt";
+					}
+					$email = $value;						
 					continue;                   
 				}
 				// Текущее поле tel?
 				if ( strpos( $this->telField, $key ) !== false )
 				{
-					$tel = $value;
+					if($key == "tel-954"){
+						$orderMethod = "lp-stul";
+						$comment = "Остались вопросы";
+					} elseif($key == "tel-87"){
+						$orderMethod = "lp-stul";
+						$comment = "Подробнее про стул";
+					} elseif($key == "tel-990"){
+						$orderMethod = "lp-stul";
+						$comment = "Подобрать товар";
+					} elseif($key == "tel-160"){
+						$orderMethod = "lp-stul";
+						$comment = "Подобрать доп.опции";
+					} elseif($key == "tel-133"){
+						$orderMethod = "lp-stul";
+						$comment = "Выгодная доставка - ".$posted_data['text-859'];
+					} elseif($key == "tel-75"){
+						$orderMethod = "lp-mashinki";
+						$comment = "Появились вопросы";
+					} elseif($key == "tel-670"){
+						$orderMethod = "lp-mashinki";
+						$comment = "Подобрать доп.опции";
+					} elseif($key == "tel-210"){
+						$orderMethod = "lp-mashinki";
+						$comment = "Выгодная доставка";
+					} elseif($key == "tel-274"){
+						$orderMethod = "lp-mashinki";
+						$comment = "Остались вопросы";
+					} elseif($key == "tel-1"){
+						$orderMethod = "website";
+						$comment = "Перезвоните мне";
+					} elseif($key == "tel-2"){
+						$orderMethod = "website";
+						$comment = "О компании";
+					} elseif($key == "tel-3"){
+						$orderMethod = "website";
+						$comment = "Резерв по акции";
+					} elseif($key == "tel-4"){
+						$orderMethod = "website";
+						$comment = "Скидка";
+					} elseif($key == "tel-5"){
+						$orderMethod = "website";
+						$comment = "Дилерам";
+            $shop = "new-pkbm-opt";
+					}
+					$tel = $value;						
 					continue;                   
 				}
 				// Текущее поле comment?
 				if ( strpos( $this->commentField, $key ) !== false )
 				{
-					$comment = strip_tags( $value );
+					if ($key == "message-1"){
+						$comment = "Вопросы от дилера: ".strip_tags( $value );
+            $shop = "new-pkbm-opt";
+					} elseif ($key == "textarea-188"){
+            $url_post = get_post_permalink($posted_data['_wpcf7_container_post']);
+            $comment = "Вопрос по товару (URL ".$url_post."): ".strip_tags( $value );
+          } elseif ($comment != ""){
+						$comment = "Резерв по акции - ".strip_tags( $value );
+					} else {
+						$comment = strip_tags( $value );
+					}
 					continue;                   
 				}				
 				
@@ -183,7 +243,7 @@ class ContactForm7
 			
 			// Передача
 			//$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment" );
-			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment );
+			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment, '', 1, $orderMethod, $shop);
 			
 		}
 		catch ( Exception $e )
