@@ -82,9 +82,8 @@ class Plugin
 	private function log( $log, $message )
 	{
 		// Выводим логи только в режиме отладки
-		/*if ( ! WP_DEBUG )
-			return;
-		*/
+		if ( ! WP_DEBUG ) return;
+
 		// Добавляем в сообщение дату, время и разделитель записей
 		$message = '[ ' . date( 'd.m.Y H:i:s' ) . ' ]' . PHP_EOL . $message . PHP_EOL . PHP_EOL;
 		

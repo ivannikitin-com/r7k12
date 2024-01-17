@@ -128,7 +128,7 @@ class ContactForm7
 			// Читаем данные и конвертируем объект формы
 			// https://stackoverflow.com/questions/42807833/how-to-capture-post-data-with-contact-form7
 			$submission = \WPCF7_Submission::get_instance();
-			//$this->plugin->activityLog( __( 'WPCF7_Submission', R7K12 ) . ': ' . var_export( $submission, true ) );
+			$this->plugin->activityLog( __( 'WPCF7_Submission', R7K12 ) . ': ' . var_export( $submission, true ) );
 			
 			if ( ! $submission ) 
 			{
@@ -141,7 +141,7 @@ class ContactForm7
 			
 			// Данные формы
 			$posted_data = $submission->get_posted_data();
-			//$this->plugin->activityLog( __( 'CF7 form data', R7K12 ) . ': ' . var_export( $posted_data, true ) );
+			$this->plugin->activityLog( __( 'CF7 form data', R7K12 ) . ': ' . var_export( $posted_data, true ) );
 			
 			// Ищем поля формы по именам, указанных в параметрах
 			foreach ($posted_data as $key => $value)
@@ -242,7 +242,7 @@ class ContactForm7
 			}
 			
 			// Передача
-			//$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment" );
+			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment" );
 			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment, '', 1, $orderMethod, $shop);
 			
 		}
