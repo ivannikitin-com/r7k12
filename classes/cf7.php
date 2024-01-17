@@ -21,7 +21,13 @@ class ContactForm7
 	 * Параметр настроек Tel Fields
 	 * @static
 	 */
-	const TEL_FIELDS_PARAM = 'tel-fields'; 	
+	const TEL_FIELDS_PARAM = 'tel-fields';
+
+	/**
+	 * Параметр настроек Files Fields
+	 * @static
+	 */
+	const FILES_FIELDS_PARAM = 'upload-files';
 	
 	/**
 	 * Параметр настроек Comment Fields
@@ -60,6 +66,13 @@ class ContactForm7
 	 * @var string
 	 */
 	private $telField;
+ 
+	/**
+	 * Поля формы с телефоном пользователя
+	 * @var string
+	 */
+	private $fileField;
+
 	
  	/**
 	 * Поля формы с комментариями
@@ -81,6 +94,7 @@ class ContactForm7
 		$this->nameField = $this->plugin->settings->get( self::NAME_FIELDS_PARAM );
 		$this->emailField = $this->plugin->settings->get( self::EMAIL_FIELDS_PARAM );
 		$this->telField = $this->plugin->settings->get( self::TEL_FIELDS_PARAM );
+		$this->fileField = $this->plugin->settings->get( self::FILES_FIELDS_PARAM);
 		$this->commentField = $this->plugin->settings->get( self::COMMENT_FIELDS_PARAM );
 		
 		// Проверяем заполнение требуемых свойств в настройках плагина
@@ -157,7 +171,7 @@ class ContactForm7
 				{
 					if($key == 'email-1'){
 						$comment = 'Отправить кп';
-            $shop = "new-pkbm-opt";
+            			$shop = "new-pkbm-opt";
 					}
 					$email = $value;						
 					continue;                   
@@ -207,21 +221,31 @@ class ContactForm7
 					} elseif($key == "tel-5"){
 						$orderMethod = "website";
 						$comment = "Дилерам";
-            $shop = "new-pkbm-opt";
+            			$shop = "new-pkbm-opt";
 					}
 					$tel = $value;						
 					continue;                   
 				}
+
+				// Текущее поле файлы?
+				if ( strpos( $this->fileField, $key ) !== false )
+				{
+					$comment = 'Прикрепленные файлы';
+					$shop = "new-pkbm-opt";
+					$email = $value;						
+					continue;                   
+				}
+
 				// Текущее поле comment?
 				if ( strpos( $this->commentField, $key ) !== false )
 				{
 					if ($key == "message-1"){
 						$comment = "Вопросы от дилера: ".strip_tags( $value );
-            $shop = "new-pkbm-opt";
+            			$shop = "new-pkbm-opt";
 					} elseif ($key == "textarea-188"){
-            $url_post = get_post_permalink($posted_data['_wpcf7_container_post']);
-            $comment = "Вопрос по товару (URL ".$url_post."): ".strip_tags( $value );
-          } elseif ($comment != ""){
+            			$url_post = get_post_permalink($posted_data['_wpcf7_container_post']);
+            			$comment = "Вопрос по товару (URL ".$url_post."): ".strip_tags( $value );
+          			} elseif ($comment != ""){
 						$comment = "Резерв по акции - ".strip_tags( $value );
 					} else {
 						$comment = strip_tags( $value );
