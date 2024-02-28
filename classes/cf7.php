@@ -94,7 +94,8 @@ class ContactForm7
 		$this->nameField = $this->plugin->settings->get( self::NAME_FIELDS_PARAM );
 		$this->emailField = $this->plugin->settings->get( self::EMAIL_FIELDS_PARAM );
 		$this->telField = $this->plugin->settings->get( self::TEL_FIELDS_PARAM );
-		$this->fileField = $this->plugin->settings->get( self::FILES_FIELDS_PARAM);
+		//$this->fileField = $this->plugin->settings->get( self::FILES_FIELDS_PARAM);
+		$this->fileField = self::FILES_FIELDS_PARAM;
 		$this->commentField = $this->plugin->settings->get( self::COMMENT_FIELDS_PARAM );
 		
 		// Проверяем заполнение требуемых свойств в настройках плагина
@@ -137,12 +138,13 @@ class ContactForm7
 			$tel = '';		
 			$comment = '';
 			$orderMethod = "website";
-      $shop = 'new-pkbm-opt';
+      		$shop = 'new-pkbm-opt';
+			$file = '';
 			
 			// Читаем данные и конвертируем объект формы
 			// https://stackoverflow.com/questions/42807833/how-to-capture-post-data-with-contact-form7
 			$submission = \WPCF7_Submission::get_instance();
-			$this->plugin->activityLog( __( 'WPCF7_Submission', R7K12 ) . ': ' . var_export( $submission, true ) );
+			//$this->plugin->activityLog( __( 'WPCF7_Submission', R7K12 ) . ': ' . var_export( $submission, true ) );
 			
 			if ( ! $submission ) 
 			{
@@ -155,11 +157,14 @@ class ContactForm7
 			
 			// Данные формы
 			$posted_data = $submission->get_posted_data();
-			$this->plugin->activityLog( __( 'CF7 form data', R7K12 ) . ': ' . var_export( $posted_data, true ) );
+			//$this->plugin->activityLog( __( 'CF7 form data', R7K12 ) . ': ' . var_export( $posted_data, true ) );
 			
 			// Ищем поля формы по именам, указанных в параметрах
 			foreach ($posted_data as $key => $value)
 			{
+				$this->plugin->activityLog( __( 'Field', R7K12 ) . ': ' . $key . ' => ' . var_export( $value, true) );
+
+
 				// Текущее поле имя?
 				if ( strpos( $this->nameField, $key ) !== false )
 				{
@@ -232,7 +237,9 @@ class ContactForm7
 				{
 					$comment = 'Прикрепленные файлы';
 					$shop = "new-pkbm-opt";
-					$email = $value;						
+					$email = $value;
+					$file = $value[0];
+					$this->plugin->activityLog( __CLASS__ . ': $file' . $file, ', $value' . var_export($value, true) );
 					continue;                   
 				}
 
@@ -266,8 +273,8 @@ class ContactForm7
 			}
 			
 			// Передача
-			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment" );
-			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment, '', 1, $orderMethod, $shop);
+			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment, $file" );
+			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment, '', 1, $orderMethod, $shop, $file);
 			
 		}
 		catch ( Exception $e )
