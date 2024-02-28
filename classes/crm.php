@@ -81,8 +81,9 @@ class CRM
 	 * @param string	$name				Название контакта (НЕ ОБЯЗАТЕЛЬНО)
 	 * @param string	$title 				Заголовок заявки (НЕ ОБЯЗАТЕЛЬНО)
 	 * @param string	$create_new_lead	'0' - новая сделка создается только если нет сделки или предыдущая в статусе "успешно реализовано" или "возврат"; '1' - новая сделка создается в любом случае
+	 * @param string	$file				Прикрепленные файлы
 	 */
-	public function send( $type, $email, $phone, $name='', $comment='', $title='', $create_new_lead='1', $orderMethod='website', $shop = '' )
+	public function send( $type, $email, $phone, $name='', $comment='', $title='', $create_new_lead='1', $orderMethod='website', $shop = '', $file = '' )
 	{
 		try
 		{
@@ -115,7 +116,8 @@ class CRM
 						"orderType" => "",
 						"orderMethod" => $orderMethod,
 						"website" => "",
-            "shop" => $shop 
+            			"shop" => $shop,
+						"file" => $file 
 					)
 				)
 
