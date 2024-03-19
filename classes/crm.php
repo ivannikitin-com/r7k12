@@ -81,9 +81,11 @@ class CRM
 	 * @param string	$name				Название контакта (НЕ ОБЯЗАТЕЛЬНО)
 	 * @param string	$title 				Заголовок заявки (НЕ ОБЯЗАТЕЛЬНО)
 	 * @param string	$create_new_lead	'0' - новая сделка создается только если нет сделки или предыдущая в статусе "успешно реализовано" или "возврат"; '1' - новая сделка создается в любом случае
-	 * @param string	$file				Прикрепленные файлы
+	 * @param mixed		$files				Прикрепленные файлы
+	 * @param string	$requirement		Требование клиента
 	 */
-	public function send( $type, $email, $phone, $name='', $comment='', $title='', $create_new_lead='1', $orderMethod='website', $shop = '', $file = '' )
+	public function send( $type, $email, $phone, $name='', $comment='', $title='', $create_new_lead='1', $orderMethod='website', $shop = '', 
+		$files = [], $requirement='' )
 	{
 		try
 		{
@@ -106,7 +108,7 @@ class CRM
 				'r7k12id'			=> isset( $_COOKIE['r7k12_si'] ) ? $_COOKIE['r7k12_si'] : null,
 				'type' 				=> $type,
 				'title'				=> $title,
-				'comment'			=> $comment,
+				'comment'			=> implode("\r\n", $files), // $comment,
 				'name'				=> $name,
 				'email'				=> $email,
 				'phone'				=> $phone,
@@ -117,7 +119,9 @@ class CRM
 						"orderMethod" => $orderMethod,
 						"website" => "",
             			"shop" => $shop,
-						"file" => $file 
+						"requirement" => $requirement,
+						"files" => $files,
+						"comment" => $comment
 					)
 				)
 

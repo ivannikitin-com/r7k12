@@ -139,7 +139,8 @@ class ContactForm7
 			$comment = '';
 			$orderMethod = "website";
       		$shop = 'new-pkbm-opt';
-			$file = '';
+			$files = [];
+			$requirement = '';
 			
 			// Читаем данные и конвертируем объект формы
 			// https://stackoverflow.com/questions/42807833/how-to-capture-post-data-with-contact-form7
@@ -232,14 +233,6 @@ class ContactForm7
 					continue;                   
 				}
 
-				// Текущее поле файлы?
-				if ( strpos( $this->fileField, $key ) !== false )
-				{
-					$comment = 'Прикрепленные файлы';
-					$file = $value[0];
-					continue;                   
-				}
-
 				// Текущее поле comment?
 				if ( strpos( $this->commentField, $key ) !== false )
 				{
@@ -255,14 +248,34 @@ class ContactForm7
 						$comment = strip_tags( $value );
 					}
 					continue;                   
-				}				
+				}
+
+				// Текущее поле файлы?
+				if ( strpos( $this->fileField, $key ) !== false )
+				{
+					// $comment = 'Прикрепленные файлы';
+					$files = $value;
+					continue;                   
+				}						
 				
+				// Поле Рекламация
+				if ( strpos( 'requirement' , $key ) !== false )
+				{
+					$requirement = strip_tags( $value );
+					continue;                   
+				}				
+
 			} 			
 			
 			// Проверка заполнения полей
 			if ( empty ( $email ) && empty ( $tel ) )
 			{			
 				// Ошибка! Поля не заполнены!
+				$this->plugin->activityLog('!!! ' . __CLASS__ . 
+					': ' . __( 'CF7 required fileds are empty!', R7K12 ) . 
+					': $email: ' .  var_export( $email, true ) . 
+					': $tel: '   .  var_export( $tel, true )
+				); 
 				$this->plugin->errorLog( 
 					__( 'CF7 required fileds are empty!', R7K12 ) . 
 					'$posted_data: ' . var_export( $posted_data, true ) );
@@ -270,8 +283,8 @@ class ContactForm7
 			}
 			
 			// Передача
-			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment, $file" );
-			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment, '', 1, $orderMethod, $shop, $file);
+			$this->plugin->activityLog( __CLASS__ . ': ' . __( 'Data prepared', R7K12 ) . ": $email, $tel, $name, $comment, $files[0]" );
+			$this->plugin->crm->send( self::FORM_TYPE, $email, $tel, $name, $comment, '', 1, $orderMethod, $shop, $files, $requirement);
 			
 		}
 		catch ( Exception $e )
